@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.basic.spring.security.rest.domain.UserDetail;
+import org.basic.spring.security.rest.dto.entity.user.AuthenticationDto;
 import org.basic.spring.security.rest.dto.entity.user.UserDto;
 import org.basic.spring.security.rest.dto.entity.user.UserList;
 import org.basic.spring.security.rest.repository.UserDetailRepository;
@@ -15,6 +16,10 @@ public class UserManagedService {
 	@Autowired
 	private UserDetailRepository userRepository;
 
+	public long count() {
+		return userRepository.count();
+	}
+	
 	public UserList findAllUsers() {
 		Iterable<UserDetail> users = userRepository.findAll();
 		
@@ -38,14 +43,14 @@ public class UserManagedService {
 		return userDto;
 	}
 
-	public void saveUser(UserDto userDto) {
+	public void saveUser(AuthenticationDto userDto) {
 		userRepository.save(userDto.buildUser());
 	}
 
 	public void updateUser(UserDto currentUser, UserDto user) {
 		currentUser.setName(user.getName());
         currentUser.setAge(user.getAge());
-		saveUser(currentUser);
+        userRepository.save(currentUser.buildUser());
 	}
 
 	public void deleteUserById(long id) {

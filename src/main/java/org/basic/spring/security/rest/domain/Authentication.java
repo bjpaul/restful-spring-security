@@ -4,11 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class Authentication {
 
 	@Id
 	private String username;
 	private String password;
+	
+	public Authentication(){}
+	
+	public Authentication(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

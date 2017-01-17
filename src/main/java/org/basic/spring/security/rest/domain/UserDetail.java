@@ -20,7 +20,7 @@ public class UserDetail {
 
 	@OneToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "user_authentication_id")
-	private User user;
+	private Authentication authentication;
 	
 	public UserDetail(){}
 	
@@ -28,6 +28,12 @@ public class UserDetail {
 		this.id = id;
 		this.name = name;
 		this.age = age;
+	}
+
+	public UserDetail(String name, int age, String username, String password) {
+		this.name = name;
+		this.age = age;
+		this.authentication = new Authentication(username, password);
 	}
 
 	public long getId() {
@@ -51,12 +57,13 @@ public class UserDetail {
 	}
 	
 	
-	public User getUser() {
-		return user;
+
+	public Authentication getAuthentication() {
+		return authentication;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
 	}
 
 	@Override

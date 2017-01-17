@@ -3,8 +3,9 @@ package org.basic.spring.security.rest.dto.entity.user;
 import org.basic.spring.security.rest.domain.UserDetail;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
+@JsonPropertyOrder({ "name", "age" })
 public class UserDto {
 
 	@JsonIgnore
@@ -46,6 +47,5 @@ public class UserDto {
 	public UserDetail buildUser(){
 		return new UserDetail(id,name, age);
 	}
-
 	
 }

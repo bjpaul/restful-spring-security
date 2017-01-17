@@ -1,5 +1,6 @@
 package org.basic.spring.security.rest.controller;
 
+import org.basic.spring.security.rest.dto.entity.user.AuthenticationDto;
 import org.basic.spring.security.rest.dto.entity.user.UserDto;
 import org.basic.spring.security.rest.dto.entity.user.UserList;
 import org.basic.spring.security.rest.dto.response.AbstractResponseDto;
@@ -17,10 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
+	
     @Autowired
     UserManagedService userService;  //Service which will do all data retrieval/manipulation work
  
-     
+  //-------------------Count user--------------------------------------------------------
+    
+    @RequestMapping(value = "/user/count", method = RequestMethod.GET)
+    public HttpEntity<AbstractResponseDto> profileDetail() {
+    	
+        return ResponseUtil.success().body(userService.count()).message("").send(HttpStatus.OK);
+    }
+    
     //-------------------Retrieve All Users--------------------------------------------------------
      
     @RequestMapping(value = "/user/", method = RequestMethod.GET)
@@ -49,11 +58,11 @@ public class UserController {
     //-------------------Create a User--------------------------------------------------------
      
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
-    public ResponseEntity<AbstractResponseDto> createUser(@RequestBody UserDto user) {
+    public ResponseEntity<AbstractResponseDto> createUser(@RequestBody AuthenticationDto user) {
  
         userService.saveUser(user);
  
-        return ResponseUtil.success().body(user).message("User created successfully !!!").send(HttpStatus.CREATED);
+        return ResponseUtil.success().body(user.detail()).message("User created successfully !!!").send(HttpStatus.CREATED);
     }
  
      
