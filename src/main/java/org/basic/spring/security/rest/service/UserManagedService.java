@@ -1,4 +1,4 @@
-package org.basic.spring.security.rest.repository;
+package org.basic.spring.security.rest.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import org.basic.spring.security.rest.domain.UserDetail;
 import org.basic.spring.security.rest.dto.entity.user.UserDto;
 import org.basic.spring.security.rest.dto.entity.user.UserList;
+import org.basic.spring.security.rest.repository.UserDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
