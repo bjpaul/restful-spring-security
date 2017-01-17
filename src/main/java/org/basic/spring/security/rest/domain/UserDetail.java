@@ -1,5 +1,7 @@
 package org.basic.spring.security.rest.domain;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,17 +26,18 @@ public class UserDetail {
 	
 	public UserDetail(){}
 	
+	public UserDetail(String name, int age, String username, String password, Set<Role> roles){
+		this.name = name;
+		this.age = age;
+		this.authentication = new Authentication(username, password, roles);
+	}
+	
 	public UserDetail(Long id, String name, int age) {
 		this.id = id;
 		this.name = name;
 		this.age = age;
 	}
 
-	public UserDetail(String name, int age, String username, String password) {
-		this.name = name;
-		this.age = age;
-		this.authentication = new Authentication(username, password);
-	}
 
 	public long getId() {
 		return id;

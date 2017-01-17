@@ -1,5 +1,6 @@
 package org.basic.spring.security.rest.config;
 
+import org.basic.spring.security.rest.enums.Authoritiy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -44,7 +45,8 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 		 http.csrf().disable()
          .authorizeRequests()
          .antMatchers("/user/count").permitAll()
-         .antMatchers("/user/**").authenticated()
+         .antMatchers("/user/profile").hasRole(Authoritiy.USER.toString())
+         .antMatchers("/user/**").hasRole(Authoritiy.ADMIN.toString())
          .and()
          .httpBasic().authenticationEntryPoint(entryPoint)
          .and()

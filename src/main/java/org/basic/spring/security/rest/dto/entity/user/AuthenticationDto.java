@@ -1,6 +1,10 @@
 package org.basic.spring.security.rest.dto.entity.user;
 
+import java.util.Set;
+
+import org.basic.spring.security.rest.domain.Role;
 import org.basic.spring.security.rest.domain.UserDetail;
+import org.basic.spring.security.rest.enums.Authoritiy;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -13,6 +17,7 @@ public class AuthenticationDto {
 	
 	private String username;
 	private String password;
+	private Set<Authoritiy> authorites;
 	
 	public AuthenticationDto(){}
 
@@ -48,8 +53,16 @@ public class AuthenticationDto {
 		this.password = password;
 	}
 
-	public UserDetail buildUser(){
-		return new UserDetail(name, age, username, password);
+	public Set<Authoritiy> getAuthorites() {
+		return authorites;
+	}
+
+	public void setAuthorites(Set<Authoritiy> authorites) {
+		this.authorites = authorites;
+	}
+
+	public UserDetail buildUser(Set<Role> roles){
+		return new UserDetail(name, age, username, password, roles);
 	}
 
 	public UserDto detail(){

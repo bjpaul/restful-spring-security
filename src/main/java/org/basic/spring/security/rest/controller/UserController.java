@@ -1,5 +1,7 @@
 package org.basic.spring.security.rest.controller;
 
+import java.security.Principal;
+
 import org.basic.spring.security.rest.dto.entity.user.AuthenticationDto;
 import org.basic.spring.security.rest.dto.entity.user.UserDto;
 import org.basic.spring.security.rest.dto.entity.user.UserList;
@@ -22,12 +24,20 @@ public class UserController {
     @Autowired
     UserManagedService userService;  //Service which will do all data retrieval/manipulation work
  
-  //-------------------Count user--------------------------------------------------------
+    //-------------------User Profile Detail--------------------------------------------------------
+    
+    @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
+    public HttpEntity<AbstractResponseDto> profileDetail(Principal principal) {
+    	UserDto user = userService.findByUsername(principal.getName());
+        return ResponseUtil.success().body(user).send(HttpStatus.OK);
+    }
+    
+    //-------------------Count user--------------------------------------------------------
     
     @RequestMapping(value = "/user/count", method = RequestMethod.GET)
-    public HttpEntity<AbstractResponseDto> profileDetail() {
+    public HttpEntity<AbstractResponseDto> userCout() {
     	
-        return ResponseUtil.success().body(userService.count()).message("").send(HttpStatus.OK);
+        return ResponseUtil.success().body(userService.count()).send(HttpStatus.OK);
     }
     
     //-------------------Retrieve All Users--------------------------------------------------------
