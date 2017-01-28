@@ -8,6 +8,7 @@ import java.util.Set;
 import org.basic.spring.security.rest.domain.Role;
 import org.basic.spring.security.rest.domain.UserDetail;
 import org.basic.spring.security.rest.dto.entity.user.AuthenticationDto;
+import org.basic.spring.security.rest.dto.entity.user.UserCountDto;
 import org.basic.spring.security.rest.dto.entity.user.UserDto;
 import org.basic.spring.security.rest.dto.entity.user.UserList;
 import org.basic.spring.security.rest.enums.Authoritiy;
@@ -24,8 +25,8 @@ public class UserManagedService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	public long count() {
-		return userRepository.count();
+	public UserCountDto count() {
+		return new UserCountDto(userRepository.count());
 	}
 	
 	public UserList findAllUsers() {

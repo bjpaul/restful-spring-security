@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public abstract class AbstractResponseDto {
-	private String message;
+	private String message = "";
 
 	private int code = HttpStatus.OK.value();
 
